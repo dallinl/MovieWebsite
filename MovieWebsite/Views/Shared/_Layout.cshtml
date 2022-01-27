@@ -1,0 +1,23 @@
+﻿<!DOCTYPE html>
+<nav>
+    <a asp-action="Index"> Homepage </a> <br /> 
+    <a asp-action="MyPodcasts"> My Podcasts </a> <br /> 
+    <a asp-action="Movies"> Submit Movies </a>
+</nav>
+
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - MovieWebsite</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" />
+</head>
+<body>
+    <div class="container">
+        <main role="main" class="pb-3">
+            @RenderBody()
+        </main>
+    </div>
+</body>
+</html>
