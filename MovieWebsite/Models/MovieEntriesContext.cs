@@ -15,15 +15,23 @@ namespace MovieWebsite.Models
         }
 
         public DbSet<Movies> movies { get; set; }
+        public DbSet<Category> Categories { get; set; }
 
         protected override void OnModelCreating(ModelBuilder mb)
         {
+
+            mb.Entity<Category>().HasData(
+                new Category { CategoryID = 1, CategoryName="Action/Thriller"},
+                new Category { CategoryID = 2, CategoryName = "Drama" },
+                new Category { CategoryID = 3, CategoryName = "Family" },
+                new Category { CategoryID = 4, CategoryName = "Comedy" }
+                );
             mb.Entity<Movies>().HasData(
 
                 new Movies
                 {
                     MovieID = 1,
-                    Category ="Action/Thriller",
+                    CategoryID = 1,
                     Title="The Bourne Identity",
                     Year= 2002,
                     Director = "Doug Liman",
@@ -36,7 +44,7 @@ namespace MovieWebsite.Models
                 new Movies
                 {
                     MovieID = 2,
-                    Category = "Drama",
+                    CategoryID = 2,
                     Title = "The Blind Side",
                     Year = 2009,
                     Director = "John Lee Hancock",
@@ -49,7 +57,7 @@ namespace MovieWebsite.Models
                 new Movies
                 {
                     MovieID = 3,
-                    Category = "Family",
+                    CategoryID = 3,
                     Title = "Monsters University",
                     Year = 2013,
                     Director = "Dan Scanlon",

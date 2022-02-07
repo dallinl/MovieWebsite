@@ -15,15 +15,50 @@ namespace MovieWebsite.Migrations
             modelBuilder
                 .HasAnnotation("ProductVersion", "3.1.22");
 
+            modelBuilder.Entity("MovieWebsite.Models.Category", b =>
+                {
+                    b.Property<int>("CategoryID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("CategoryName")
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("CategoryID");
+
+                    b.ToTable("Categories");
+
+                    b.HasData(
+                        new
+                        {
+                            CategoryID = 1,
+                            CategoryName = "Action/Thriller"
+                        },
+                        new
+                        {
+                            CategoryID = 2,
+                            CategoryName = "Drama"
+                        },
+                        new
+                        {
+                            CategoryID = 3,
+                            CategoryName = "Family"
+                        },
+                        new
+                        {
+                            CategoryID = 4,
+                            CategoryName = "Comedy"
+                        });
+                });
+
             modelBuilder.Entity("MovieWebsite.Models.Movies", b =>
                 {
                     b.Property<int>("MovieID")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
-                    b.Property<string>("Category")
-                        .IsRequired()
-                        .HasColumnType("TEXT");
+                    b.Property<int>("CategoryID")
+                        .HasColumnType("INTEGER");
 
                     b.Property<string>("Director")
                         .IsRequired()
@@ -52,13 +87,15 @@ namespace MovieWebsite.Migrations
 
                     b.HasKey("MovieID");
 
+                    b.HasIndex("CategoryID");
+
                     b.ToTable("movies");
 
                     b.HasData(
                         new
                         {
                             MovieID = 1,
-                            Category = "Action/Thriller",
+                            CategoryID = 1,
                             Director = "Doug Liman",
                             Edited = false,
                             Lent_To = "Cousin Ben",
@@ -70,7 +107,7 @@ namespace MovieWebsite.Migrations
                         new
                         {
                             MovieID = 2,
-                            Category = "Drama",
+                            CategoryID = 2,
                             Director = "John Lee Hancock",
                             Edited = true,
                             Lent_To = "",
@@ -82,7 +119,7 @@ namespace MovieWebsite.Migrations
                         new
                         {
                             MovieID = 3,
-                            Category = "Family",
+                            CategoryID = 3,
                             Director = "Dan Scanlon",
                             Edited = false,
                             Lent_To = "",
@@ -91,6 +128,15 @@ namespace MovieWebsite.Migrations
                             Title = "Monsters University",
                             Year = 2013
                         });
+                });
+
+            modelBuilder.Entity("MovieWebsite.Models.Movies", b =>
+                {
+                    b.HasOne("MovieWebsite.Models.Category", "Category")
+                        .WithMany()
+                        .HasForeignKey("CategoryID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 #pragma warning restore 612, 618
         }

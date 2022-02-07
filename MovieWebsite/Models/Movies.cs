@@ -12,15 +12,13 @@ namespace MovieWebsite.Models
         [Key]
         [Required]
         public int MovieID { get; set; }
-        [Required]
-        public string Category { get; set; }
-        [Required]
+        [Required(ErrorMessage = "Please enter a Title for the movie.")]
         public string Title { get; set; }
-        [Required]
+        [Required(ErrorMessage ="Please enter a Year for the movie.")]
         public int Year { get; set; }
-        [Required]
+        [Required(ErrorMessage = "Please enter a Director for the movie.")]
         public string Director { get; set; }
-        [Required]
+        [Required(ErrorMessage = "Please enter a Rating for the movie.")]
         public string Rating { get; set; }
 
         // Edited, Lent_To, and Notes should not be required 
@@ -29,5 +27,11 @@ namespace MovieWebsite.Models
         // Notes should not be over 25 characters 
         [MaxLength(25)]
         public string Notes { get; set; }
+
+
+        // Foreign Keys
+        [Required(ErrorMessage = "Please enter a Category for the movie.")]
+        public int CategoryID { get; set; }
+        public Category Category { get; set; }
     }
 }
